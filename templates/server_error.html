@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}500 - Sunucu Hatası{% endblock %}
+
+{% block content %}
+<h1>404 - Sayfa Bulunamadı</h1>
+<h1>500 - Sunucu Hatası</h1>
+<p>Üzgünüz, bir sunucu hatası oluştu.</p>
+<a href="{{ url_for('home') }}">Ana Sayfa'ya Geri Dön</a>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+
+
+<form action="" method="POST" class="form">
+    <h2 class="text-center">{{ form_title }}</h2>
+
+    <ul>
+        <li>
+            <label for="name">Kullanıcı Adı</label>
+            <input type="text" class="form-control" id="name" name="name" required>
+        </li>
+        <li>
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" name="email" required>
+        </li>
+        <li>
+            <label for="password">Şifre</label>
+            <input type="password" class="form-control" id="password1" name="password1" required>
+        </li>
+        <li>
+            <label for="repassword">Şifreyi Onayla</label>
+            <input type="password" class="form-control" id="password2" name="password2" required>
+        </li>
+        <li>
+            <button type="submit" class="btn btn-primary">{{ button_text }}</button>
+        </li>
+    </ul>
+    {% if current_user.name != 'Admin' %}
+    <span class="or">hesabın var mı?</span>
+    <a href="{{ url_for('login') }}" class="form-url">Hemen giriş yap!</a>
+    {% endif %}
+</form>
+{% endblock %}
+       

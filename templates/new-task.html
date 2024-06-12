@@ -1,0 +1,72 @@
+{% extends 'base.html' %} {% block title %}Yeni Görev{% endblock %} {% block
+    content %}
+    <div class="container mt-5">
+      <h2 class="text-center">Yeni Görev Listesi Oluştur</h2>
+      <form method="POST">
+        <div class="mb-3">
+          <label for="description" class="form-label">Görevler</label>
+          <textarea
+            class="form-control"
+            id="content"
+            name="content"
+            rows="5"
+            required
+          ></textarea>
+          <small id="contentHelp" class="form-text text-muted"
+            >Her görevi alt alta yazın.</small
+          >
+        </div>
+        <div class="mb-3">
+          <label for="due_date" class="form-label">Bitiş Tarihi</label>
+          <input type="date" class="form-control" id="due_date" name="due_date" />
+        </div>
+        <div class="mb-3">
+          <label for="assignee_id" class="form-label">Atanacak Kişi</label>
+          <select class="form-select" id="assignee_id" name="assignee_id" required>
+            {% for user in users %}
+            {% if user.name != 'Admin' %}
+            <option value="{{ user.id }}">{{ user.name }}</option>
+            {% endif %}
+            {% endfor %}
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Oluştur</button>
+      </form>
+    
+      {% if tasks %}
+      <hr />
+      <h3 class="fw-light text-center mb-4">Eklenen Görevler</h3>
+      <ul class="list-group">
+        {% for task_list in tasks %}
+        <li class="list-group-item">
+          <h5>{{ task_list.title }}</h5>
+          <ul>
+            {% for task in task_list.tasks %}
+            <li>
+              <div class="row">
+                <div class="col-md-10">
+                  <strong>{{ task.content }}</strong><br />
+                  <small class="text-muted"
+                    >Bitiş Tarihi: {{ task.due_date.strftime('%Y-%m-%d') }}</small
+                  >
+                </div>
+                <div class="col-md-2 text-end">
+                  <button type="button" class="btn btn-success me-2">
+                    <i class="bi bi-check"></i>
+                  </button>
+                  <button type="button" class="btn btn-danger">
+                    <i class="bi bi-x"></i>
+                  </button>
+                </div>
+              </div>
+            </li>
+            {% endfor %}
+          </ul>
+        </li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+    </div>
+    
+    {% endblock %}
+    

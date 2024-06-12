@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Profil{% endblock %}
+
+{% block content %}
+<div class="container">
+    <form action="{{ url_for('profile') }}" method="POST" class="form">
+        <h2 class="text-center">Profil</h2>
+        <ul>
+            <li>
+                <label for="new_name">Yeni Kullanıcı Adı:</label>
+                <input type="text" class="form-control" id="new_name" name="new_name" value="{{ user.name }}" required>
+            </li>
+            <li>
+                <label for="new_email">Yeni E-posta Adresi:</label>
+                <input type="email" class="form-control" id="new_email" name="new_email" value="{{ user.email }}" required>
+            </li>
+            <li>
+                <label for="new_password">Yeni Şifre:</label>
+                <input type="password" class="form-control" id="new_password" name="new_password" required>
+            </li>
+            <li>
+                <label for="confirm_password">Şifreyi Onayla:</label>
+                <input type="password" class="form-control" id="confirm_password" name="confirm_password" required>
+            </li>
+            <li>
+                <button type="submit" class="btn btn-primary">Bilgileri Güncelle</button>
+            </li>
+        </ul>
+    </form>
+</div>
+{% endblock %}

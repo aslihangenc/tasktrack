@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}Log In{% endblock %} 
+
+{% block content %}
+<form method="POST" class="form">
+  <h3 class="h3 mb-3 fw-normal">Giriş yap</h3>
+  <ul>
+    <li>
+      <label for="name">Name</label>
+      <input type="text" id="name" name="name" class="form-control"/>
+    </li>
+    <li>
+      <label for="password">Şifre</label>
+      <input type="password" id="password" name="password" />
+    </li>
+    <li>
+      <button type="submit" class="btn btn-primary">Giriş yap</button>
+    </li>
+  </ul>
+  <span class="or">hesabın yok mu?</span>
+  <a href="{{ url_for('register') }}" class="form-url">Hemen kayıt ol!</a>
+</form>
+{% endblock %} 
