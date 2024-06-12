@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}Admin{% endblock %}
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center">Kullanıcı Listesi</h2>
+    <ul class="list-group">
+        {% for user in users %}
+        {% if user.name != "Admin" %}
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            <span class="flex-grow-1">{{ user.name }}</span>
+            {% set status = user.get_task_status() %}
+            {% if status == "Başlamadı" %}
+            <span class="badge bg-danger">{{ status }}</span>
+            {% elif status == "Devam ediyor" %}
+            <span class="badge bg-warning text-dark">{{ status }}</span>
+            {% elif status == "Bitti" %}
+            <span class="badge bg-success">{{ status }}</span>
+            {% endif %}
+            <a href="{{ url_for('user_tasks', user_id=user.id) }}" class="btn btn-primary ms-3">Görevlerini Gör</a>
+            <form action="{{ url_for('delete_user') }}" method="POST" style="display: inline-block; margin-left: 10px;">
+                <input type="hidden" name="user_id" value="{{ user.id }}">
+                <button type="submit" class="btn btn-danger">Kullanıcıyı Sil</button>
+            </form>
+        </li>
+        {% endif %}
+        {% endfor %}
+    </ul>
+    <div class="text-center mt-3">
+        <a href="{{ url_for('new_user') }}" class="btn btn-success">Kullanıcı Ekle</a>
+    </div>
+</div>
+{% endblock %}
