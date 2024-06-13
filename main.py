@@ -354,8 +354,14 @@ def delete_task():
 def page_not_found(error):
     return render_template('page_not_found.html'), 404
 
+
 @app.errorhandler(500)
 def server_error(error):
+    return render_template('server_error.html'), 500
+
+
+@app.route('/test-server-error')
+def test_server_error():
     return render_template('server_error.html'), 500
 
 
