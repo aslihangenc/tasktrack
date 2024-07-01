@@ -164,11 +164,17 @@ def profile():
         profile_by_name = User.query.filter_by(
             name=new_name).first()
 
-        if profile_by_email:
-            flash('Bu e-posta zaten var.', category='error')
-        elif profile_by_name:
-            flash('Bu isim zaten var.', category='error')
-        elif new_password != confirm_password:
+        if new_email != current_user.email:
+            profile_by_email = User.query.filter_by(email=new_email).first()
+            if profile_by_email:
+                flash('Bu e-posta zaten var.', category='error')
+                
+        if new_name != current_user.name:
+            profile_by_name = User.query.filter_by(name=new_name).first()    
+            if profile_by_name:
+                flash('Bu isim zaten var.', category='error')
+                
+        if new_password != confirm_password:
             flash('Şifreler eşleşmiyor.', category='error')
         else:
             current_user.name = new_name
