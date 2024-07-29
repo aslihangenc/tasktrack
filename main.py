@@ -5,10 +5,13 @@ from flask_login import LoginManager, current_user, login_user, logout_user, log
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime, timezone
 import humanize
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'asla tahmin edemezsin'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'varsayılan_değer')
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///app.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
